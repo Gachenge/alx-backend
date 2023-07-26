@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-class FIFOCache that inherits from BaseCaching and is a caching system
+class FIFOCache that inherits from BaseCaching and
+is a caching system
 """
 
 BaseCaching = __import__('base_caching').BaseCaching
@@ -23,7 +24,9 @@ class FIFOCache(BaseCaching):
             key -
             item -
         """
-        if key is not None and item is not None:
+        if key is None or item is None:
+            pass
+        else:
             self.cache_data[key] = item
             items = len(self.cache_data.values())
             if items > BaseCaching.MAX_ITEMS:

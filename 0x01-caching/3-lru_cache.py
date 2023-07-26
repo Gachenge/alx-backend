@@ -3,6 +3,7 @@
 a class LRUCache that inherits from BaseCaching and
 is a caching system
 """
+from collections import OrderedDict
 BaseCaching = __import__('base_caching').BaseCaching
 
 
@@ -14,7 +15,9 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         """assign to the dictionry the item discard items when cache is full"""
-        if key is not None and item is not None:
+        if key is None or item is None:
+            pass
+        else:
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 (k := next(iter(self.cache_data)), self.cache_data.pop(k))
                 print(f"DISCARD: {k}")
