@@ -1,33 +1,41 @@
 #!/usr/bin/env python3
+"""Create a class LRUCache that inherits from
+BaseCaching and is a caching system:
 """
-a class LRUCache that inherits from BaseCaching and
-is a caching system
-"""
-from collections import OrderedDict
+
+
 BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """least recently used algorithm"""
+    """implement the least recently used algorithm"""
+
     def __init__(self):
         """initialise the class"""
         super().__init__()
+        self.usedKeys = []
 
     def put(self, key, item):
-        """assign to the dictionry the item discard items when cache is full"""
-        if key is None or item is None:
-            pass
-        else:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                (k := next(iter(self.cache_data)), self.cache_data.pop(k))
-                print(f"DISCARD: {k}")
+        """
+        assign to the dictionary the item to the key
+        """
+        if key is not None and item is not None:
             self.cache_data[key] = item
+            if key not in self.usedKeys:
+                self.usedKeys.append(key)
+            else:
+                self.usedKeys.append(
+                    self.usedKeys.pop(self.usedKeys.index(key)))
+            if len(self.usedKeys) > BaseCaching.MAX_ITEMS:
+                discard = self.usedKeys.pop(0)
+                del self.cache_data[discard]
+                print('DISCARD: {:s}'.format(discard))
 
     def get(self, key):
-        """return the value linked to the key"""
-        if key is None or key not in self.cache_data.keys():
-            return None
-        else:
-            value = self.cache_data.pop(key)
-            self.cache_data[key] = value
-            return value
+        """
+        return the value in self.cache_data linked to key
+        """
+        if key is not None and key in self.cache_data.keys():
+            self.usedKeys.append(self.usedKeys.pop(self.usedKeys.index(key)))
+            return self.cache_data.get(key)
+        return None
