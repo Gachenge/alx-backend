@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+
 class FIFOCache that inherits from BaseCaching and
 is a caching system
 """
@@ -27,10 +28,12 @@ class FIFOCache(BaseCaching):
         if key is None or item is None:
             pass
         else:
-            items = len(self.cache_data())
-            if items > BaseCaching.MAX_ITEMS:
-                (k := next(iter(self.cache_data)), self.cache_data.pop(k))
-                print(f"DISCARD: {k}")
+            items = len(self.cache_data)
+            if items >= BaseCaching.MAX_ITEMS and\
+                    key not in self.cache_data.keys():
+                keys = next(iter(self.cache_data.keys()))
+                self.cache_data.pop(keys)
+                print(f"DISCARD: {keys}")
             self.cache_data[key] = item
 
     def get(self, key):
