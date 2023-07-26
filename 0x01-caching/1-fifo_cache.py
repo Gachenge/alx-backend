@@ -4,6 +4,7 @@ class FIFOCache that inherits from BaseCaching and is a caching system
 """
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class FIFOCache(BaseCaching):
     """First in first out caching"""
     def __init__(self):
@@ -18,7 +19,7 @@ class FIFOCache(BaseCaching):
             if items > BaseCaching.MAX_ITEMS:
                 (k := next(iter(self.cache_data)), self.cache_data.pop(k))
                 print(f"DISCARD: {k}")
-        
+
     def get(self, key):
         """return the value in self.cache_data linked to key"""
         if key is None or key not in self.cache_data.keys():

@@ -6,6 +6,7 @@ is a caching system
 from collections import OrderedDict
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class LRUCache(BaseCaching):
     """least recently used algorithm"""
     def __init__(self):
@@ -20,7 +21,6 @@ class LRUCache(BaseCaching):
                 print(f"DISCARD: {k}")
             self.cache_data[key] = item
 
-
     def get(self, key):
         """return the value linked to the key"""
         if key is None or key not in self.cache_data.keys():
@@ -28,4 +28,4 @@ class LRUCache(BaseCaching):
         else:
             value = self.cache_data.pop(key)
             self.cache_data[key] = value
-            return value            
+            return value

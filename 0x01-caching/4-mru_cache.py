@@ -5,6 +5,7 @@ a class MRUCache that inherits from BaseCaching and is a caching system
 from statistics import mode
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class MRUCache(BaseCaching):
     """discard most recently used caching"""
     def __init__(self):
@@ -19,9 +20,12 @@ class MRUCache(BaseCaching):
             return None
         else:
             return(self.cache_data.get(key))
-        
+
     def put(self, key, item):
-        """Must assign to the dictionary self.cache_data the item value for the key key."""
+        """
+        Must assign to the dictionary self.cache_data the
+        item value for the key key.
+        """
         if key is not None and item is not None:
             self.cache_data[key] = item
             self.lst.append(key)

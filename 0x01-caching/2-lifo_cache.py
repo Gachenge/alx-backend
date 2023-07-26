@@ -4,6 +4,7 @@ class LIFOCache that inherits from BaseCaching and is a caching system
 """
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class LIFOCache(BaseCaching):
     """last in first out caching"""
     def __init__(self):
@@ -18,7 +19,7 @@ class LIFOCache(BaseCaching):
                 lkey, lvalue = self.cache_data.popitem()
                 print(f"DISCARD: {lkey}")
             self.cache_data[key] = item
-            
+
     def get(self, key):
         """return the value in self.cache_data linked to key"""
         if key is None or key not in self.cache_data.keys():
