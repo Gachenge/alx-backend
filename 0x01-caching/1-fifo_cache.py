@@ -1,45 +1,41 @@
 #!/usr/bin/env python3
-"""Create a class FIFOCache that inherits from
-BaseCaching and is a caching system:
 """
-
+class FIFOCache that inherits from BaseCaching and is a caching system
+"""
 
 BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """_summary_
+    """
+    First in first out caching
     """
 
     def __init__(self):
-        """_summary_
+        """
+        initialise the data dictionary
         """
         super().__init__()
 
     def put(self, key, item):
-        """_summary_
-
-        Args:
-                        key (_type_): _description_
-                        item (_type_): _description_
         """
-        if key is None or item is None:
-            pass
-        else:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS \
-                    and key not in self.cache_data.keys():
-                first_key = next(iter(self.cache_data.keys()))
-                del self.cache_data[first_key]
-                print("DISCARD: {}". format(first_key))
-
+        assign to the dictionary the item to the key
+            key -
+            item -
+        """
+        if key is not None and item is not None:
             self.cache_data[key] = item
+            items = len(self.cache_data.values())
+            if items > BaseCaching.MAX_ITEMS:
+                (k := next(iter(self.cache_data)), self.cache_data.pop(k))
+                print(f"DISCARD: {k}")
 
     def get(self, key):
-        """return the value in self.cache_data linked to key
-
-        Args:
-                        key (_type_): _description_
+        """
+        return the value in self.cache_data linked to key
+            key -
         """
         if key is None or key not in self.cache_data.keys():
             return None
-        return self.cache_data.get(key)
+        else:
+            return(self.cache_data.get(key))
