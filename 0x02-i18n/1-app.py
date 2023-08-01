@@ -6,8 +6,6 @@ simple flask app that utilises config
 from flask import Flask, render_template
 from flask_babel import Babel
 
-babel = Babel()
-
 
 class Config():
     """configuration for a flask app"""
@@ -18,6 +16,7 @@ class Config():
 
 app = Flask(__name__)
 app.config.from_object(Config)
+babel = Babel(app)
 
 
 @app.route("/")
