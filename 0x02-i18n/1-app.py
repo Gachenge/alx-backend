@@ -23,3 +23,6 @@ babel = Babel(app)
 def index():
     """return the index page"""
     return render_template("1-index.html")
+
+if __name__ == '__main__':
+    app.run(port="5000", host="0.0.0.0", debug=True)
